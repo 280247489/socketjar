@@ -13,28 +13,49 @@
 </html>
 <script>
     if ("WebSocket" in window){
-        var ws = new WebSocket("ws://localhost:8098");
-        ws.onopen = function(e) {
-            console.log('open');
-            /*ws.send('dnf');
-            ws.send('dnf1');
-            ws.send('dnf2');*/
+        var websocket = new WebSocket("ws://localhost:8098");
+            console.log(websocket.readyState);
+        websocket.onopen = function(e) {
+            websocket.send('dnf-dnf-dnf');
         };
-        ws.onmessage = function(e) {
-            console.log('message');
-            document.getElementById("hhh2").innerHTML += '-'+e.data;
+        websocket.onmessage = function(e) {
+            alert('message');
+            document.getElementById("hhh2").innerHTML += '-message('+e.data+')';
         };
-        ws.onclose = function(e) {
-            console.log('close');
+        websocket.onclose = function(e) {
             document.getElementById("hhh2").innerHTML += '-close';
-            console.error(e);
         };
-        ws.onerror = function(e) {
-            console.log('error');
+        websocket.onerror = function(e) {
             document.getElementById("hhh2").innerHTML += '-error';
-            console.error(e);
         };
     }else {
         alert("您的浏览器不支持 WebSocket!");
     }
 </script>
+<!--
+ GET / HTTP/1.1
+Host: localhost:8098
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:63342
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: Idea-69a40201=adf0ade8-1998-481d-9447-3646cfc98d6c
+Sec-WebSocket-Key: BwjkaEHuoRDSJmpndwMq0g==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+
+
+GET / HTTP/1.1
+Connection:Upgrade
+Host:127.0.0.1:8088
+Origin:null
+Sec-WebSocket-Extensions:x-webkit-deflate-frame
+Sec-WebSocket-Key:puVOuWb7rel6z2AVZBKnfw==
+Sec-WebSocket-Version:13
+Upgrade:websocket
+
+ -->
