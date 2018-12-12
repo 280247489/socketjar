@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试Socket连接</title>
+</head>
+<body>
+    <h1 id="hhh0">Socket 测试</h1>
+    -------------------
+    <h1 id="hhh1"></h1>
+    <h1 id="hhh2"></h1>
+</body>
+</html>
+<script>
+    if ("WebSocket" in window){
+        var ws = new WebSocket("ws://localhost:8098");
+        ws.onopen = function(e) {
+            console.log('open');
+            /*ws.send('dnf');
+            ws.send('dnf1');
+            ws.send('dnf2');*/
+        };
+        ws.onmessage = function(e) {
+            console.log('message');
+            document.getElementById("hhh2").innerHTML += '-'+e.data;
+        };
+        ws.onclose = function(e) {
+            console.log('close');
+            document.getElementById("hhh2").innerHTML += '-close';
+            console.error(e);
+        };
+        ws.onerror = function(e) {
+            console.log('error');
+            document.getElementById("hhh2").innerHTML += '-error';
+            console.error(e);
+        };
+    }else {
+        alert("您的浏览器不支持 WebSocket!");
+    }
+</script>
